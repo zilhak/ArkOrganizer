@@ -2,23 +2,24 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/video.hpp>
 #include <opencv2/videoio.hpp>
+#include <opencv2/videoio/videoio_c.h>
 #include <vector>
 
 namespace summarizer {
 
-struct Matrix {
-    int x;
-    int y;
+struct MergeData {
+    cv::Size merge_mat;
+    cv::Size resize_mat;
 };
 
-struct MergeDatga {
-    Matrix mergeMat;
-    double resizeRatio;
+struct OutputData {
+    cv::Size merge_mat;
+    cv::Size output_image_size;
+    std::string file_path;
 };
 
-Matrix defineFrameMatrix(Matrix const & oneFrameSize, Matrix const & outputImageMaxSize);
-bool makeOutputImage(std::vector<cv::Mat> & frameVector, Matrix const & matrix);
-
+MergeData defineFrameMatrix(cv::Size const & one_frame_size, cv::Size const & output_image_size);
+bool makeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & output_data);
 
 } // namespace summarizer
 

@@ -156,9 +156,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="VideoSummarizer.cpp" />
+    <ClCompile Include="VideoSummerizerInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoSummarizer.h" />
+    <ClInclude Include="VideoSummarizerInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

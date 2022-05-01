@@ -14,9 +14,15 @@
     <ClCompile Include="VideoSummarizer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="VideoSummerizerInterface.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoSummarizer.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoSummarizerInterface.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
