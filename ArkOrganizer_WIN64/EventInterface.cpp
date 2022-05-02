@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "../VideoSummarizer/VideoSummarizerInterface.h"
 
-bool RunSummarize(std::string const & base_dir)
+bool RunSummarize(summarizer::SummarizeConfig const & config)
 {
-    return summarizer::runSummarize(base_dir, std::string());
+    return summarizer::runSummarize(config);
 }

@@ -1,4 +1,4 @@
 #pragma once
 #include <string>
 
-bool RunSummarize(std::string const & base_dir);
+bool RunSummarize(summarizer::SummarizeConfig const & config);
