@@ -1,12 +1,6 @@
-﻿// AoFileViewer.cpp: 구현 파일
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "ArkOrganizer_WIN64.h"
 #include "AoFileViewer.h"
-
-
-// AoFileViewer
 
 IMPLEMENT_DYNCREATE(AoFileViewer, CFormView)
 
@@ -27,9 +21,6 @@ void AoFileViewer::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(AoFileViewer, CFormView)
 END_MESSAGE_MAP()
-
-
-// AoFileViewer 진단
 
 #ifdef _DEBUG
 void AoFileViewer::AssertValid() const

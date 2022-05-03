@@ -194,6 +194,7 @@
     <ClInclude Include="ArkOrganizer_WIN64.h" />
     <ClInclude Include="ArkOrganizer_WIN64Dlg.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="PathUtil.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="ArkOrganizer_WIN64.cpp" />
     <ClCompile Include="ArkOrganizer_WIN64Dlg.cpp" />
     <ClCompile Include="EventInterface.cpp" />
+    <ClCompile Include="PathUtil.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

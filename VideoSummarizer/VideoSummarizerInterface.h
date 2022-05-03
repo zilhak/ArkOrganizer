@@ -7,6 +7,11 @@
 #endif
 
 namespace summarizer{
+enum class ImageType : char {
+    JPG,
+    PNG
+};
+
 constexpr int fhd_resolution_width = 1920;
 constexpr int fhd_resolution_height = 1080;
 
@@ -15,11 +20,6 @@ constexpr int       default_resolution_height = fhd_resolution_height;
 constexpr int       default_output_row        = 5;
 constexpr ImageType default_image_type        = ImageType::JPG;
 constexpr bool      default_overwite          = false;
-
-enum class ImageType : char {
-    JPG,
-    PNG
-};
 
 struct SummarizeConfig {
     std::string video_path;
@@ -31,6 +31,6 @@ struct SummarizeConfig {
     bool overwite          = default_overwite;
 };
 
-DLL_API bool runSummarize(SummarizeConfig const & config_data);
+DLL_API bool VideoSummarize(SummarizeConfig const & config_data);
 
 } // namespace summarizer

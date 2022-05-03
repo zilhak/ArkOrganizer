@@ -18,8 +18,8 @@ struct OutputData {
     std::string file_path;
 };
 
-MergeData defineFrameMatrix(cv::Size const & one_frame_size, cv::Size const & output_image_size, int rows);
-bool makeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & output_data);
+MergeData DefineFrameMatrix(cv::Size const & one_frame_size, cv::Size const & output_image_size, int rows);
+bool MakeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & output_data);
 
 } // namespace summarizer
 

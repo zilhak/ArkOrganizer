@@ -1,8 +1,7 @@
-#include "EventInterface.h"
 #include "pch.h"
-#include "../VideoSummarizer/VideoSummarizerInterface.h"
+#include "EventInterface.h"
 
 bool RunSummarize(summarizer::SummarizeConfig const & config)
 {
-    return summarizer::runSummarize(config);
+    return summarizer::VideoSummarize(config);
 }

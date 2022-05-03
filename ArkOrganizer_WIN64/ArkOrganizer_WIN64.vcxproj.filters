@@ -16,6 +16,15 @@
     <Filter Include="소스 파일\VideoSummarize">
       <UniqueIdentifier>{c22a8f39-45cb-4cae-b9b9-ef0dbf427ed8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\AoFileViewer">
+      <UniqueIdentifier>{8fd57e66-7e9f-470f-96a2-324f7c88bcef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Data">
+      <UniqueIdentifier>{091286df-24e9-4bd4-b63b-f002ef37ac7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Interface">
+      <UniqueIdentifier>{b60cdd90-b7a3-417a-95e5-31c61492ec7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -30,20 +39,23 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AoFileViewer.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ArkOrganizer_WIN64.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="ArkOrganizer_WIN64Dlg.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="EventInterface.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="VideoSummarizeRunner.h">
       <Filter>소스 파일\VideoSummarize</Filter>
+    </ClInclude>
+    <ClInclude Include="AoFileViewer.h">
+      <Filter>소스 파일\AoFileViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="PathUtil.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="EventInterface.h">
+      <Filter>소스 파일\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -53,17 +65,20 @@
     <ClCompile Include="ArkOrganizer_WIN64Dlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="AoFileViewer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="EventInterface.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="VideoSummarizeRunner.cpp">
       <Filter>소스 파일\VideoSummarize</Filter>
+    </ClCompile>
+    <ClCompile Include="AoFileViewer.cpp">
+      <Filter>소스 파일\AoFileViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="PathUtil.cpp">
+      <Filter>소스 파일\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="EventInterface.cpp">
+      <Filter>소스 파일\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ namespace summarizer {
 
 constexpr int MARGIN = 10;
 
-MergeData defineFrameMatrix(cv::Size const & oneFrameSize, cv::Size const & outputImageSize, int rows)
+MergeData DefineFrameMatrix(cv::Size const & oneFrameSize, cv::Size const & outputImageSize, int rows)
 {
     MergeData result;
 
@@ -19,7 +19,7 @@ MergeData defineFrameMatrix(cv::Size const & oneFrameSize, cv::Size const & outp
     return result;
 }
 
-bool makeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & output_data)
+bool MakeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & output_data)
 {
     if (frame_vector.empty())
         return false;
