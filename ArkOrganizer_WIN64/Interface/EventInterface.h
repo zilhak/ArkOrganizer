@@ -1,4 +1,4 @@
 #include <string>
-#include "../VideoSummarizer/VideoSummarizerInterface.h"
+#include <VideoSummarizer/source/VideoSummarizerInterface.h>
 
 bool RunSummarize(summarizer::SummarizeConfig const & config);

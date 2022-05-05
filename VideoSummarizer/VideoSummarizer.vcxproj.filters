@@ -11,19 +11,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VideoSummarizer.cpp">
+    <ClInclude Include="source\VideoSummarizer.h">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoSummerizerInterface.cpp">
+    </ClInclude>
+    <ClInclude Include="source\VideoSummarizerInterface.h">
       <Filter>소스 파일</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VideoSummarizer.h">
+    <ClCompile Include="source\VideoSummerizerInterface.cpp">
       <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="VideoSummarizerInterface.h">
+    </ClCompile>
+    <ClCompile Include="source\VideoSummarizer.cpp">
       <Filter>소스 파일</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿#include "pch.h"
-#include "ArkOrganizer_WIN64.h"
+#include "../ArkOrganizer_WIN64.h"
 #include "AoFileViewer.h"
 
 IMPLEMENT_DYNCREATE(AoFileViewer, CFormView)

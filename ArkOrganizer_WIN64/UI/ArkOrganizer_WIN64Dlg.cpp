@@ -8,7 +8,7 @@
 #include "ArkOrganizer_WIN64Dlg.h"
 #include "afxdialogex.h"
 
-#include "VideoSummarizeRunner.h"
+#include "VideoSummarize/VideoSummarizeRunner.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,10 +75,11 @@ void CArkOrganizerWIN64Dlg::OnVideoSummarize()
 	CString inserted_path;
 	GetDlgItemTextW(PATH_EDIT, inserted_path);
 	CT2CA ansiString(inserted_path);
-	std::string str(ansiString);
+	std::wstring wstr(inserted_path);
 
 	VideoSummarizerRunner runner;
-	runner.SetInputHomeDirPath(str);
+	runner.SetInputHomeDirPath(wstr);
+	runner.SetOutputHomeDirPath(L"F:\\test");
 	runner.Run();
 }
 

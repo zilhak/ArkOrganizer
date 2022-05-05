@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\VideoSummarizer.h" />
+    <ClInclude Include="source\VideoSummarizerInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\VideoSummarizer.cpp" />
+    <ClCompile Include="source\VideoSummerizerInterface.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -155,14 +163,6 @@
       <AdditionalDependencies>lib\opencv_world455.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="VideoSummarizer.cpp" />
-    <ClCompile Include="VideoSummerizerInterface.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="VideoSummarizer.h" />
-    <ClInclude Include="VideoSummarizerInterface.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
