@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 
-#ifdef SUMMARIZER
+#ifdef VIDEO_SUMMARIZER
 #define DLL_API __declspec(dllexport)
 #else
 #define DLL_API __declspec(dllimport)
@@ -34,8 +34,7 @@ struct SummarizeConfig {
 
 DLL_API bool VideoSummarize(SummarizeConfig const & config_data);
 
-
-DLL_API class ImageViewer 
+class ImageViewer 
 {
 using PauseCode = char;
 public:

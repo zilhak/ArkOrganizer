@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "VideoSummarizeRunner.h"
-#include <Data/PathUtil.h>
-#include "stack"
+
+#include <Util/PathUtil.h>
+#include <Util/ExtensionUtil.h>
+#include <Util/FileUtil.h>
 
 bool VideoSummarizerRunner::IsReady()
 {

@@ -8,7 +8,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArkOrganizer_WIN64", "ArkOrganizer_WIN64\ArkOrganizer_WIN64.vcxproj", "{E566A43F-8603-4EC4-9EFF-27DEEC3D4494}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0F1F12E4-114B-429B-808A-F846344FE041} = {0F1F12E4-114B-429B-808A-F846344FE041}
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A} = {61D1EDE4-EA7F-493B-9789-F9DAE361C86A}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataManager", "DataManager\DataManager.vcxproj", "{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +37,14 @@ Global
 		{E566A43F-8603-4EC4-9EFF-27DEEC3D4494}.Release|x64.Build.0 = Release|x64
 		{E566A43F-8603-4EC4-9EFF-27DEEC3D4494}.Release|x86.ActiveCfg = Release|Win32
 		{E566A43F-8603-4EC4-9EFF-27DEEC3D4494}.Release|x86.Build.0 = Release|Win32
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Debug|x64.ActiveCfg = Debug|x64
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Debug|x64.Build.0 = Debug|x64
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Debug|x86.ActiveCfg = Debug|Win32
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Debug|x86.Build.0 = Debug|Win32
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Release|x64.ActiveCfg = Release|x64
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Release|x64.Build.0 = Release|x64
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Release|x86.ActiveCfg = Release|Win32
+		{61D1EDE4-EA7F-493B-9789-F9DAE361C86A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,8 @@
 #include <pch.h>
 #include "ResultManager.h"
 
-#include <Data/PathUtil.h>
+#include <Util/PathUtil.h>
+#include <Util/ExtensionUtil.h>
 #include <Interface/EventInterface.h>
 
 void ResultManager::viewResult(std::filesystem::path const& home_dir)

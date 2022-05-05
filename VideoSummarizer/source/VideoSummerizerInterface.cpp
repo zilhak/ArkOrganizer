@@ -2,7 +2,6 @@
 #include "VideoSummarizer.h"
 
 #include <filesystem>
-#define SUMMARIZER
 
 namespace summarizer {
 

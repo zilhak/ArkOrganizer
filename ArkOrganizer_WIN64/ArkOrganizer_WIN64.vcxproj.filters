@@ -54,9 +54,6 @@
     <ClInclude Include="Interface\EventInterface.h">
       <Filter>소스 파일\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Data\PathUtil.h">
-      <Filter>소스 파일\Data</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -71,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="ResultManager\ResultManager.h">
       <Filter>소스 파일\ResultManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultManager\ThemeData.h">
+      <Filter>소스 파일\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +91,6 @@
     </ClCompile>
     <ClCompile Include="Interface\EventInterface.cpp">
       <Filter>소스 파일\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\PathUtil.cpp">
-      <Filter>소스 파일\Data</Filter>
     </ClCompile>
     <ClCompile Include="UI\FileVeiwer\AoFileViewer.cpp">
       <Filter>소스 파일\UI\AoFileViewer</Filter>
