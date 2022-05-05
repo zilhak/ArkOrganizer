@@ -7,6 +7,7 @@
 #include "ArkOrganizer_WIN64.h"
 #include "MainDialog.h"
 #include "afxdialogex.h"
+#include <Data/AoConfig.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -156,7 +157,9 @@ void MainDialog::OnEnChangeEdit()
 BOOL MainDialog::PreTranslateMessage(MSG * pMsg)
 {
     if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
-		return true;
+		//if (pMsg->hwnd == GetDlgItem(PATH_EDIT)->m_hWnd)
+			
+		return TRUE;
     }
 
     return CDialog::PreTranslateMessage(pMsg);
