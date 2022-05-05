@@ -34,7 +34,7 @@ void VideoSummarizerRunner::Run()
         
         config.video_path.assign(file_path.string());
         config.output_path.assign(output_path.string());
-        config.output_rows = 4;
+        config.output_rows = 5;
 
         if (RunSummarize(config) == false) {
             std::filesystem::path special_case_save_dir(input_home_path_);
