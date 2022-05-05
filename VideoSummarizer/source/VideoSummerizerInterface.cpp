@@ -24,7 +24,7 @@ bool VideoSummarize(SummarizeConfig const & config_data)
 
     cv::Mat frame;
     cv::Size outputImageSize(config_data.output_size_width, config_data.output_size_height);
-    cv::Size frameSize(capture.get(cv::CAP_PROP_FRAME_HEIGHT), capture.get(cv::CAP_PROP_FRAME_WIDTH));
+    cv::Size frameSize(capture.get(cv::CAP_PROP_FRAME_WIDTH), capture.get(cv::CAP_PROP_FRAME_HEIGHT));
     if (frameSize.area() == 0) {
         return false;
     }
@@ -53,9 +53,64 @@ bool VideoSummarize(SummarizeConfig const & config_data)
     output_data.output_image_size = outputImageSize;
     output_data.merge_mat = image_data.merge_mat;
     output_data.file_path = output_real_path;
-    MakeOutputImage(images, output_data);
+    if (MakeOutputImage(images, output_data) == false)
+        return false;
 
     return true;
+}
+
+ImageViewer::ImageViewer(std::vector<std::string> const& image_paths)
+{
+    SetImageList(image_paths);
+}
+
+void ImageViewer::SetImageList(std::vector<std::string> const& image_paths)
+{
+    image_list_ = image_paths;
+}
+
+ImageViewer::PauseCode ImageViewer::RunImageViewer(size_t start_index)
+{
+    constexpr PauseCode pause_code_error = 1;
+    PauseCode pause_code = 0;
+    if (image_list_.empty())
+        return pause_code_error;
+
+    cv::Mat image;
+    while (true) {
+        if (image_list_.size() <= index_) {
+            index_ = image_list_.size() - 1;
+        } else if (index_ < 0) {
+            index_ = 0;
+        }
+
+        image = cv::imread(image_list_[index_]);
+        cv::imshow(image_list_[index_], image);
+        pause_code = cv::waitKey();
+
+        if (pause_code == 'd')
+            index_++;
+        if (pause_code == 'a')
+            index_--;
+
+        if (pause_code == 27)
+            break;
+    }
+    
+    return pause_code;
+}
+
+ImageViewer::PauseCode ImageViewer::Resume()
+{
+    return RunImageViewer();
+}
+
+std::string ImageViewer::GetCurImagePath()
+{
+    if (index_ < image_list_.size())
+        return image_list_[index_];
+    else
+        return "Error!";
 }
 
 } // namespace summarizer

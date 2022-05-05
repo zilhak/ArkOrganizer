@@ -8,13 +8,20 @@ MergeData DefineFrameMatrix(cv::Size const & oneFrameSize, cv::Size const & outp
 {
     MergeData result;
 
-    int resize_height = (outputImageSize.height / rows) - MARGIN;
-    int resize_width = ((outputImageSize.width * (long long)resize_height) / (5 * (long long)oneFrameSize.height)) - MARGIN;
+    if (oneFrameSize.width < oneFrameSize.height) {
+        rows--;
+    }
 
-    result.merge_mat.width = outputImageSize.width / (resize_width + MARGIN);
+    int area_height = outputImageSize.height - MARGIN;
+    int area_width = outputImageSize.width - MARGIN;
+    int resize_height = (area_height / rows);
+    double ratio = (double)resize_height / (double)oneFrameSize.height;
+    int resize_width = ((double)oneFrameSize.width * ratio);
+
+    result.merge_mat.width = area_width / resize_width;
     result.merge_mat.height = rows;
-    result.resize_mat.width = resize_width;
-    result.resize_mat.height = resize_height;
+    result.resize_mat.width = resize_width - MARGIN;
+    result.resize_mat.height = resize_height - MARGIN;
 
     return result;
 }
@@ -44,9 +51,7 @@ bool MakeOutputImage(std::vector<cv::Mat> & frame_vector, OutputData const & out
         pos_y += oneFrameHeight + MARGIN;
     }
 
-    cv::imwrite(output_data.file_path, output);
-
-    return true;
+    return cv::imwrite(output_data.file_path, output);
 }
 
 } // namespace summarizer

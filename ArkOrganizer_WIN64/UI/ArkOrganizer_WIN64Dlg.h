@@ -27,4 +27,5 @@ protected:
 public:
 	afx_msg void OnVideoSummarize();
 	afx_msg void OnFileBring();
+	afx_msg void OnViewOutput();
 };

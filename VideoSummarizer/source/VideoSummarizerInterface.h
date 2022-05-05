@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 #ifdef SUMMARIZER
 #define DLL_API __declspec(dllexport)
@@ -32,5 +33,23 @@ struct SummarizeConfig {
 };
 
 DLL_API bool VideoSummarize(SummarizeConfig const & config_data);
+
+
+DLL_API class ImageViewer 
+{
+using PauseCode = char;
+public:
+    ImageViewer() {};
+    ImageViewer(std::vector<std::string> const & image_paths);
+public:
+   DLL_API void SetImageList(std::vector<std::string> const & image_paths);
+   DLL_API PauseCode RunImageViewer(size_t start_index = 0);
+   DLL_API PauseCode Resume();
+   DLL_API std::string GetCurImagePath();
+
+private:
+    int index_ = 0;
+    std::vector<std::string> image_list_;
+};
 
 } // namespace summarizer

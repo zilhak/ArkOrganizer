@@ -27,28 +27,22 @@ void VideoSummarizerRunner::Run()
 
     std::vector<std::wstring> videoList = util::path::MakeFilePathList(input_home_path_, only_videofile);
     for (auto const & file : videoList) {
-        std::filesystem::path origin_path(file);
-        std::filesystem::path output_path = output_home_path_;
-        std::stack<std::filesystem::path> path_stack;
+        std::filesystem::path file_path(file);
+        std::filesystem::path relative_file_path = std::filesystem::relative(file_path, input_home_path_);
+        std::filesystem::path output_path(output_home_path_);
+        output_path /= relative_file_path;
         
-        while (origin_path != input_home_path_) {
-            path_stack.push(origin_path.filename());
-            origin_path = origin_path.parent_path();
-        }
-
-        while (!path_stack.empty()) {
-            if (!std::filesystem::exists(output_path))
-                std::filesystem::create_directories(output_path);
-            output_path /= path_stack.top();
-            path_stack.pop();
-        }
-        
-        config.video_path.assign(std::filesystem::path(file).string());
+        config.video_path.assign(file_path.string());
         config.output_path.assign(output_path.string());
-        config.output_rows = 5;
+        config.output_rows = 4;
 
-        //insertConfig(config);
-        RunSummarize(config);
+        if (RunSummarize(config) == false) {
+            std::filesystem::path special_case_save_dir(input_home_path_);
+            special_case_save_dir = special_case_save_dir.parent_path();
+            special_case_save_dir /= "AO_special_case";
+            special_case_save_dir /= relative_file_path;
+            util::file::move(file_path, special_case_save_dir);
+        }
     }
 }
 

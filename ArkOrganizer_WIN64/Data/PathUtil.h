@@ -46,4 +46,9 @@ std::vector<std::filesystem::path> MakeFolderPathList(std::wstring const & base_
                                                       std::function<bool(std::filesystem::path const &)> const folder_check_func, 
                                                       bool recursive = false);
 } //namespace path
+namespace file
+{
+bool moveToDir(std::filesystem::path const & file_path, std::filesystem::path const & output_path, bool make_dir = true);
+bool move(std::filesystem::path const & file_path, std::filesystem::path const & output_file_path, bool make_dir = true);
+} // namespace file
 } // namespace util
