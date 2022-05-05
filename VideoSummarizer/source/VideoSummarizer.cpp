@@ -15,8 +15,8 @@ MergeData DefineFrameMatrix(cv::Size const & oneFrameSize, cv::Size const & outp
     int area_height = outputImageSize.height - MARGIN;
     int area_width = outputImageSize.width - MARGIN;
     int resize_height = (area_height / rows);
-    double ratio = (double)resize_height / (double)oneFrameSize.height;
-    int resize_width = ((double)oneFrameSize.width * ratio);
+    double ratio = static_cast<double>(resize_height) / static_cast<double>(oneFrameSize.height);
+    int resize_width = static_cast<int>((double)oneFrameSize.width * ratio);
 
     result.merge_mat.width = area_width / resize_width;
     result.merge_mat.height = rows;

@@ -152,3 +152,12 @@ void MainDialog::OnBnClickedPathUndo()
 void MainDialog::OnEnChangeEdit()
 {
 }
+
+BOOL MainDialog::PreTranslateMessage(MSG * pMsg)
+{
+    if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
+		return true;
+    }
+
+    return CDialog::PreTranslateMessage(pMsg);
+}

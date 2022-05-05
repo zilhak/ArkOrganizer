@@ -56,7 +56,7 @@ path_type ExtensionTable::findType(std::wstring const & ext) const
 
     auto find_result = type_table_.find(extension);
     if (find_result == type_table_.end())
-        path_type::unknown;
+        return path_type::unknown;
     else
         return find_result->second;
 }
@@ -68,7 +68,7 @@ path_type ExtensionTable::findType(std::wstring && ext)
     });
     auto find_result = type_table_.find(ext);
     if (find_result == type_table_.end())
-        path_type::unknown;
+        return path_type::unknown;
     else
         return find_result->second;
 }

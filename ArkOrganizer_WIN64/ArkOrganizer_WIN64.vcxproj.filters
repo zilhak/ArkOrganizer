@@ -28,31 +28,28 @@
     <Filter Include="소스 파일\OneFileBringer">
       <UniqueIdentifier>{12ca27ab-86bd-475e-86e6-9bf3fb2016f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\UI">
+    <Filter Include="소스 파일\ArkOrganizerUI">
       <UniqueIdentifier>{e814997d-a8aa-4dbe-9cea-c97a27ef4d20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\UI\AoFileViewer">
+    <Filter Include="소스 파일\ArkOrganizerUI\VideoSummarizerDialog">
+      <UniqueIdentifier>{0db6e171-e505-47d1-a8ba-9f58f18a8c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ArkOrganizerUI\AoFileView">
       <UniqueIdentifier>{8fd57e66-7e9f-470f-96a2-324f7c88bcef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ArkOrganizerUI\OptionView">
+      <UniqueIdentifier>{eea9d656-e43b-47bc-a743-fdb978da693d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="OneFileBringer\OneFileBringer.h">
-      <Filter>소스 파일\OneFileBringer</Filter>
-    </ClInclude>
     <ClInclude Include="UI\ArkOrganizer_WIN64.h">
-      <Filter>소스 파일\UI</Filter>
+      <Filter>소스 파일\ArkOrganizerUI</Filter>
     </ClInclude>
     <ClInclude Include="UI\MainDialog.h">
-      <Filter>소스 파일\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="VideoSummarize\VideoSummarizeRunner.h">
-      <Filter>소스 파일\VideoSummarize</Filter>
-    </ClInclude>
-    <ClInclude Include="Interface\EventInterface.h">
-      <Filter>소스 파일\Interface</Filter>
+      <Filter>소스 파일\ArkOrganizerUI</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
@@ -64,39 +61,54 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UI\FileVeiwer\AoFileViewer.h">
-      <Filter>소스 파일\UI\AoFileViewer</Filter>
+      <Filter>소스 파일\ArkOrganizerUI\AoFileView</Filter>
     </ClInclude>
-    <ClInclude Include="ResultManager\ResultManager.h">
+    <ClInclude Include="source\Data\ThemeData.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Data\AoConfig.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Interface\EventInterface.h">
+      <Filter>소스 파일\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\OneFileBringer\OneFileBringer.h">
+      <Filter>소스 파일\OneFileBringer</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ResultManager\ResultManager.h">
       <Filter>소스 파일\ResultManager</Filter>
     </ClInclude>
-    <ClInclude Include="ResultManager\ThemeData.h">
-      <Filter>소스 파일\Data</Filter>
+    <ClInclude Include="source\VideoSummarize\VideoSummarizeRunner.h">
+      <Filter>소스 파일\VideoSummarize</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OneFileBringer\OneFileBringer.cpp">
-      <Filter>소스 파일\OneFileBringer</Filter>
-    </ClCompile>
     <ClCompile Include="UI\MainDialog.cpp">
-      <Filter>소스 파일\UI</Filter>
+      <Filter>소스 파일\ArkOrganizerUI</Filter>
     </ClCompile>
     <ClCompile Include="UI\ArkOrganizer_WIN64.cpp">
-      <Filter>소스 파일\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoSummarize\VideoSummarizeRunner.cpp">
-      <Filter>소스 파일\VideoSummarize</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface\EventInterface.cpp">
-      <Filter>소스 파일\Interface</Filter>
+      <Filter>소스 파일\ArkOrganizerUI</Filter>
     </ClCompile>
     <ClCompile Include="UI\FileVeiwer\AoFileViewer.cpp">
-      <Filter>소스 파일\UI\AoFileViewer</Filter>
+      <Filter>소스 파일\ArkOrganizerUI\AoFileView</Filter>
     </ClCompile>
-    <ClCompile Include="ResultManager\ResultManager.cpp">
+    <ClCompile Include="source\Data\AoConfig.cpp">
+      <Filter>소스 파일\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Interface\EventInterface.cpp">
+      <Filter>소스 파일\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\OneFileBringer\OneFileBringer.cpp">
+      <Filter>소스 파일\OneFileBringer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ResultManager\ResultManager.cpp">
       <Filter>소스 파일\ResultManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VideoSummarize\VideoSummarizeRunner.cpp">
+      <Filter>소스 파일\VideoSummarize</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

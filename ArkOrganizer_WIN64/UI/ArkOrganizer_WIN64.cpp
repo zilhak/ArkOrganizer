@@ -1,5 +1,5 @@
-﻿#include "pch.h"
-#include "framework.h"
+﻿#include <pch.h>
+#include <framework.h>
 #include "ArkOrganizer_WIN64.h"
 #include "MainDialog.h"
 

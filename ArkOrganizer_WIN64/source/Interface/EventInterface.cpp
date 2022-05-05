@@ -1,4 +1,4 @@
-#include "pch.h"
+#include <pch.h>
 #include "EventInterface.h"
 
 bool RunSummarize(summarizer::SummarizeConfig const & config)
