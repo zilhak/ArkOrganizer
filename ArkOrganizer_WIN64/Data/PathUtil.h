@@ -42,5 +42,8 @@ void InsertInnerFolderPathList(std::vector<std::wstring> & list,
 std::vector<std::wstring> MakeFilePathList(std::wstring const & base_dir, 
                                           std::function<bool(std::filesystem::path const &)> const file_check_func, 
                                           bool recursive = true);
+std::vector<std::filesystem::path> MakeFolderPathList(std::wstring const & base_dir, 
+                                                      std::function<bool(std::filesystem::path const &)> const folder_check_func, 
+                                                      bool recursive = false);
 } //namespace path
 } // namespace util

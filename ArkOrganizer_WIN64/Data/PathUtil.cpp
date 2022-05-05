@@ -52,7 +52,12 @@ path_type ExtensionTable::findType(std::wstring const & ext) const
     std::for_each(extension.begin(), extension.end(), [](wchar_t & c) {
         c = std::tolower(c);
     });
-    return type_table_.find(extension)->second;
+
+    auto find_result = type_table_.find(extension);
+    if (find_result == type_table_.end())
+        path_type::unknown;
+    else
+        return find_result->second;
 }
 
 path_type ExtensionTable::findType(std::wstring && ext)
@@ -60,13 +65,23 @@ path_type ExtensionTable::findType(std::wstring && ext)
     std::for_each(ext.begin(), ext.end(), [](wchar_t & c) {
         c = std::tolower(c);
     });
-    return type_table_.find(ext)->second;
+    auto find_result = type_table_.find(ext);
+    if (find_result == type_table_.end())
+        path_type::unknown;
+    else
+        return find_result->second;
 }
+
 static ExtensionTable g_extension_table_;
 
 path_type ClassifyType(std::filesystem::path const & path)
 {
-    return g_extension_table_.findType(path);
+    std::wstring extension = path.extension();
+    if (extension.at(0) == '.') {
+        extension = extension.substr(1, extension.size() - 1);
+    }
+
+    return g_extension_table_.findType(extension);
 }
 } // namespace extension
 
@@ -118,6 +133,31 @@ std::vector<std::wstring> MakeFilePathList(std::wstring const & base_dir,
     }
 
     return file_path_list;
+}
+
+std::vector<std::filesystem::path> MakeFolderPathList(std::wstring const& base_dir,
+                                                      std::function<bool(std::filesystem::path const&)> const folder_check_func,
+                                                      bool recursive)
+{
+    Path root_path = base_dir;
+    if (std::filesystem::is_directory(root_path) == false)
+        return std::vector<std::filesystem::path>();
+
+    std::vector<std::filesystem::path> inner_directory_list;
+    for (auto const & file : Dir_Iterator(root_path)) {
+        if (file.is_directory() && (folder_check_func == nullptr || folder_check_func(file))) {
+            inner_directory_list.emplace_back(file.path().wstring());
+        }
+    }
+
+    if (recursive) {
+        // TODO
+        for (auto const & sub_dir : inner_directory_list) {
+            //InsertInnerFolderPathList(file_path_list, sub_dir, folder_check_func);
+        }
+    }
+
+    return inner_directory_list;
 }
 } //namespace path
 } // namespace util

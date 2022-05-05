@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <string>
+#include <filesystem>
 
 class CArkOrganizerWIN64Dlg : public CDialogEx
 {
@@ -25,4 +26,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnVideoSummarize();
+	afx_msg void OnFileBring();
 };

@@ -9,6 +9,7 @@
 #include "afxdialogex.h"
 
 #include "VideoSummarize/VideoSummarizeRunner.h"
+#include <OneFileBringer/OneFileBringer.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,6 +28,7 @@ void CArkOrganizerWIN64Dlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CArkOrganizerWIN64Dlg, CDialogEx)
 	ON_BN_CLICKED(BUTTON_VIDEOSUMMARIZER, &CArkOrganizerWIN64Dlg::OnVideoSummarize)
+	ON_BN_CLICKED(BUTTON_FILEBRINGER, &CArkOrganizerWIN64Dlg::OnFileBring)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//ON_EN_CHANGE(IDC_EDIT1, &CArkOrganizerWIN64Dlg::OnEnChangeEdit1)
@@ -74,7 +76,6 @@ void CArkOrganizerWIN64Dlg::OnVideoSummarize()
 {
 	CString inserted_path;
 	GetDlgItemTextW(PATH_EDIT, inserted_path);
-	CT2CA ansiString(inserted_path);
 	std::wstring wstr(inserted_path);
 
 	VideoSummarizerRunner runner;
@@ -83,3 +84,12 @@ void CArkOrganizerWIN64Dlg::OnVideoSummarize()
 	runner.Run();
 }
 
+void CArkOrganizerWIN64Dlg::OnFileBring()
+{
+	CString inserted_path;
+	GetDlgItemTextW(PATH_EDIT, inserted_path);
+	std::wstring wstr(inserted_path);
+	std::filesystem::path home_path(wstr);
+
+	OneFileBringer::BringOneFile(home_path);
+}
