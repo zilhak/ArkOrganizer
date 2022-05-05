@@ -5,51 +5,66 @@
 #include "pch.h"
 #include "framework.h"
 #include "ArkOrganizer_WIN64.h"
-#include "ArkOrganizer_WIN64Dlg.h"
+#include "MainDialog.h"
 #include "afxdialogex.h"
-
-#include "VideoSummarize/VideoSummarizeRunner.h"
-#include <OneFileBringer/OneFileBringer.h>
-#include <ResultManager/ResultManager.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-CArkOrganizerWIN64Dlg::CArkOrganizerWIN64Dlg(CWnd* pParent /*=nullptr*/)
+MainDialog::MainDialog(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_ARKORGANIZER_WIN64_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CArkOrganizerWIN64Dlg::DoDataExchange(CDataExchange* pDX)
+void MainDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CArkOrganizerWIN64Dlg, CDialogEx)
-	ON_BN_CLICKED(BUTTON_VIDEOSUMMARIZER, &CArkOrganizerWIN64Dlg::OnVideoSummarize)
-	ON_BN_CLICKED(BUTTON_FILEBRINGER, &CArkOrganizerWIN64Dlg::OnFileBring)
-	ON_BN_CLICKED(BUTTON_OUTPUTVIEW, &CArkOrganizerWIN64Dlg::OnViewOutput)
+void MainDialog::AllocForm()
+{
+	CCreateContext context;
+	ZeroMemory(&context, sizeof(context));
+
+	CRect panel_rect;
+
+	GetDlgItem(IDC_FILEVIEWER_RECT)->GetWindowRect(&panel_rect);
+	ScreenToClient(&panel_rect);
+
+	file_viewer_ = new AoFileViewer();
+	file_viewer_->Create(NULL, NULL, WS_CHILD | WS_VSCROLL | WS_HSCROLL, panel_rect, this, IDD_FILEVIEWER, &context);
+	file_viewer_->OnInitialUpdate();
+	file_viewer_->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_FILEVIEWER_RECT)->DestroyWindow();
+}
+
+BEGIN_MESSAGE_MAP(MainDialog, CDialogEx)
+	ON_BN_CLICKED(BUTTON_VIDEOSUMMARIZER, &MainDialog::OnVideoSummarize)
+	ON_BN_CLICKED(BUTTON_FILEBRINGER, &MainDialog::OnFileBring)
+	ON_BN_CLICKED(BUTTON_OUTPUTVIEW, &MainDialog::OnViewOutput)
 	ON_WM_PAINT()
+	ON_WM_SIZE()
 	ON_WM_QUERYDRAGICON()
-	//ON_EN_CHANGE(IDC_EDIT1, &CArkOrganizerWIN64Dlg::OnEnChangeEdit1)
+	//ON_EN_CHANGE(IDC_EDIT1, &MainDialog::OnEnChangeEdit1)
 	ON_WM_GETMINMAXINFO()
-	ON_BN_CLICKED(BUTTON_PATH_UNDO, &CArkOrganizerWIN64Dlg::OnBnClickedPathUndo)
-	ON_EN_CHANGE(PATH_EDIT, &CArkOrganizerWIN64Dlg::OnEnChangeEdit)
+	ON_BN_CLICKED(BUTTON_PATH_UNDO, &MainDialog::OnBnClickedPathUndo)
+	ON_EN_CHANGE(PATH_EDIT, &MainDialog::OnEnChangeEdit)
 END_MESSAGE_MAP()
 
-BOOL CArkOrganizerWIN64Dlg::OnInitDialog()
+BOOL MainDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hIcon, FALSE);
+	AllocForm();
 
 	return TRUE;
 }
 
-void CArkOrganizerWIN64Dlg::OnPaint()
+void MainDialog::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -72,12 +87,18 @@ void CArkOrganizerWIN64Dlg::OnPaint()
 	}
 }
 
-HCURSOR CArkOrganizerWIN64Dlg::OnQueryDragIcon()
+void MainDialog::OnSize(UINT nType, int cx, int cy)
+{
+	if (file_viewer_)
+        file_viewer_->update();
+}
+
+HCURSOR MainDialog::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CArkOrganizerWIN64Dlg::OnVideoSummarize()
+void MainDialog::OnVideoSummarize()
 {
 	CString inserted_path;
 	GetDlgItemTextW(PATH_EDIT, inserted_path);
@@ -89,7 +110,7 @@ void CArkOrganizerWIN64Dlg::OnVideoSummarize()
 	runner.Run();
 }
 
-void CArkOrganizerWIN64Dlg::OnFileBring()
+void MainDialog::OnFileBring()
 {
 	CString inserted_path;
 	GetDlgItemTextW(PATH_EDIT, inserted_path);
@@ -99,7 +120,7 @@ void CArkOrganizerWIN64Dlg::OnFileBring()
 	OneFileBringer::BringOneFile(home_path);
 }
 
-void CArkOrganizerWIN64Dlg::OnViewOutput()
+void MainDialog::OnViewOutput()
 {
 	CString output_dir;
 	GetDlgItemTextW(OUTPUT_PATH_EDIT, output_dir);
@@ -110,7 +131,7 @@ void CArkOrganizerWIN64Dlg::OnViewOutput()
 }
 
 
-void CArkOrganizerWIN64Dlg::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+void MainDialog::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 {
 	lpMMI->ptMinTrackSize.x = 600;
 	lpMMI->ptMinTrackSize.y = 800;
@@ -119,13 +140,13 @@ void CArkOrganizerWIN64Dlg::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 }
 
 
-void CArkOrganizerWIN64Dlg::OnBnClickedPathUndo()
+void MainDialog::OnBnClickedPathUndo()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
 
 
-void CArkOrganizerWIN64Dlg::OnEnChangeEdit()
+void MainDialog::OnEnChangeEdit()
 {
 	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
 	// CDialogEx::OnInitDialog() 함수를 재지정 

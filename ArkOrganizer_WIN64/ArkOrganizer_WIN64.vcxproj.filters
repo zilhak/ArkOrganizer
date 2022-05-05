@@ -45,7 +45,7 @@
     <ClInclude Include="UI\ArkOrganizer_WIN64.h">
       <Filter>소스 파일\UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\ArkOrganizer_WIN64Dlg.h">
+    <ClInclude Include="UI\MainDialog.h">
       <Filter>소스 파일\UI</Filter>
     </ClInclude>
     <ClInclude Include="VideoSummarize\VideoSummarizeRunner.h">
@@ -80,7 +80,7 @@
     <ClCompile Include="OneFileBringer\OneFileBringer.cpp">
       <Filter>소스 파일\OneFileBringer</Filter>
     </ClCompile>
-    <ClCompile Include="UI\ArkOrganizer_WIN64Dlg.cpp">
+    <ClCompile Include="UI\MainDialog.cpp">
       <Filter>소스 파일\UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\ArkOrganizer_WIN64.cpp">

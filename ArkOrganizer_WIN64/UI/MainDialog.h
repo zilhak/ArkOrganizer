@@ -1,29 +1,39 @@
 ﻿#pragma once
 #include <string>
 #include <filesystem>
+#include <memory>
 
-class CArkOrganizerWIN64Dlg : public CDialogEx
+#include <VideoSummarize/VideoSummarizeRunner.h>
+#include <OneFileBringer/OneFileBringer.h>
+#include <ResultManager/ResultManager.h>
+#include <UI/FileVeiwer/AoFileViewer.h>
+
+class MainDialog : public CDialogEx
 {
+protected:
+	DECLARE_MESSAGE_MAP()
 public:
-	CArkOrganizerWIN64Dlg(CWnd* pParent = nullptr);
+	MainDialog(CWnd* pParent = nullptr);
 
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ARKORGANIZER_WIN64_DIALOG };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+	void AllocForm();
 
 
 // 구현입니다.
 protected:
 	HICON m_hIcon;
+	AoFileViewer* file_viewer_;
 
 	// 생성된 메시지 맵 함수
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg HCURSOR OnQueryDragIcon();
-	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnVideoSummarize();
 	afx_msg void OnFileBring();
@@ -31,4 +41,5 @@ public:
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 	afx_msg void OnBnClickedPathUndo();
 	afx_msg void OnEnChangeEdit();
+
 };

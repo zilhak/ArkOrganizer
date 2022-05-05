@@ -203,7 +203,7 @@
     <ClInclude Include="ResultManager\ResultManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UI\ArkOrganizer_WIN64.h" />
-    <ClInclude Include="UI\ArkOrganizer_WIN64Dlg.h" />
+    <ClInclude Include="UI\MainDialog.h" />
     <ClInclude Include="UI\FileVeiwer\AoFileViewer.h" />
     <ClInclude Include="VideoSummarize\VideoSummarizeRunner.h" />
   </ItemGroup>
@@ -219,7 +219,7 @@
     </ClCompile>
     <ClCompile Include="ResultManager\ResultManager.cpp" />
     <ClCompile Include="UI\ArkOrganizer_WIN64.cpp" />
-    <ClCompile Include="UI\ArkOrganizer_WIN64Dlg.cpp" />
+    <ClCompile Include="UI\MainDialog.cpp" />
     <ClCompile Include="UI\FileVeiwer\AoFileViewer.cpp" />
     <ClCompile Include="VideoSummarize\VideoSummarizeRunner.cpp" />
   </ItemGroup>

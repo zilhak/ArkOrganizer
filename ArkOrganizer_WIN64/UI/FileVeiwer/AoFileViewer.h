@@ -1,16 +1,16 @@
 ﻿#pragma once
 
-
-
-// AoFileViewer 폼 보기
-
 class AoFileViewer : public CFormView
 {
 	DECLARE_DYNCREATE(AoFileViewer)
-
 protected:
-	AoFileViewer();           // 동적 만들기에 사용되는 protected 생성자입니다.
+	DECLARE_MESSAGE_MAP()
+public:
+	AoFileViewer();
 	virtual ~AoFileViewer();
+
+public:
+	void update();
 
 public:
 #ifdef AFX_DESIGN_TIME
@@ -23,10 +23,15 @@ public:
 #endif
 #endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
+public:
+    afx_msg virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, 
+                        const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
 
-	DECLARE_MESSAGE_MAP()
+protected:
+	afx_msg virtual void DoDataExchange(CDataExchange* pDX);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnDraw(CDC * dc) override;
+
 };
 
 

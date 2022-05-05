@@ -1,11 +1,7 @@
-﻿
-// ArkOrganizer_WIN64.cpp: 애플리케이션에 대한 클래스 동작을 정의합니다.
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "framework.h"
 #include "ArkOrganizer_WIN64.h"
-#include "ArkOrganizer_WIN64Dlg.h"
+#include "MainDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,7 +23,7 @@ BOOL CArkOrganizerWIN64App::InitInstance()
 	CWinApp::InitInstance();
 	CShellManager *pShellManager = new CShellManager;
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
-	CArkOrganizerWIN64Dlg dlg;
+	MainDialog dlg;
 
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
