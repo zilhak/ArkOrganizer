@@ -6,16 +6,16 @@ IMPLEMENT_DYNCREATE(AoFileViewer, CFormView)
 
 AoFileViewer::AoFileViewer() : CFormView(IDD_FILEVIEWER)
 {
-
+	
 }
 
 AoFileViewer::~AoFileViewer()
 {
 }
 
-void AoFileViewer::update()
+void AoFileViewer::Update()
 {
-	ResizeDynamicLayout();
+	RedrawWindow();
 }
 
 BOOL AoFileViewer::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, 
@@ -51,15 +51,12 @@ void AoFileViewer::Dump(CDumpContext& dc) const
 void AoFileViewer::OnDraw(CDC* dc)
 {
 	RECT rect;
-	rect.left = 10;
-	rect.right = 200;
-	rect.top = 0;
-	rect.bottom = 200;
+	this->GetClientRect(&rect);
 	dc->DrawTextW(_T("haha"), &rect, DT_CENTER | DT_VCENTER | DT_SMART);
 	dc->DrawFocusRect(&rect);
 }
 
 void AoFileViewer::OnSize(UINT nType, int cx, int cy)
 {
-	UINT a = nType;
+    CFormView::OnSize(nType, cx, cy);
 }

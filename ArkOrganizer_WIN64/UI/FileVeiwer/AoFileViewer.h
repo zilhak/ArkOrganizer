@@ -10,7 +10,7 @@ public:
 	virtual ~AoFileViewer();
 
 public:
-	void update();
+	void Update();
 
 public:
 #ifdef AFX_DESIGN_TIME
@@ -29,8 +29,10 @@ public:
 
 protected:
 	afx_msg virtual void DoDataExchange(CDataExchange* pDX);
-	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnDraw(CDC * dc) override;
+
+public:
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
 };
 
