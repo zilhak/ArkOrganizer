@@ -81,6 +81,9 @@
     <ClInclude Include="source\VideoSummarize\VideoSummarizeRunner.h">
       <Filter>소스 파일\VideoSummarize</Filter>
     </ClInclude>
+    <ClInclude Include="UI\VideoSummarizer\VideoSummarizerDialog.h">
+      <Filter>소스 파일\ArkOrganizerUI\VideoSummarizerDialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -109,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="source\VideoSummarize\VideoSummarizeRunner.cpp">
       <Filter>소스 파일\VideoSummarize</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\VideoSummarizer\VideoSummarizerDialog.cpp">
+      <Filter>소스 파일\ArkOrganizerUI\VideoSummarizerDialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

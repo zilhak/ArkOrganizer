@@ -1,12 +1,13 @@
 ﻿#pragma once
-#include <string>
 #include <filesystem>
 #include <memory>
+
+#include <UI/FileVeiwer/AoFileViewer.h>
+#include <UI/VideoSummarizer/VideoSummarizerDialog.h>
 
 #include <VideoSummarize/VideoSummarizeRunner.h>
 #include <OneFileBringer/OneFileBringer.h>
 #include <ResultManager/ResultManager.h>
-#include <UI/FileVeiwer/AoFileViewer.h>
 
 class MainDialog : public CDialogEx
 {
@@ -28,6 +29,7 @@ protected:
 protected:
 	HICON m_hIcon;
 	AoFileViewer* file_viewer_ = nullptr;
+	VideoSummarizerDialog* video_summarizer = nullptr;
 
 	// 생성된 메시지 맵 함수
 	virtual BOOL OnInitDialog();

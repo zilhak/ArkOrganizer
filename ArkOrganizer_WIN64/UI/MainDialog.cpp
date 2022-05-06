@@ -1,8 +1,4 @@
-﻿
-// ArkOrganizer_WIN64Dlg.cpp: 구현 파일
-//
-
-#include "pch.h"
+﻿#include <pch.h>
 #include "framework.h"
 #include "ArkOrganizer_WIN64.h"
 #include "MainDialog.h"
@@ -105,14 +101,13 @@ HCURSOR MainDialog::OnQueryDragIcon()
 
 void MainDialog::OnVideoSummarize()
 {
-	CString inserted_path;
-	GetDlgItemTextW(PATH_EDIT, inserted_path);
-	std::wstring wstr(inserted_path);
+	if (video_summarizer == nullptr) {
+		video_summarizer = new VideoSummarizerDialog();
+		video_summarizer->Create(IDD_VIDEO_SUMMARIZER, this);
+		video_summarizer->SetActiveWindow();
+	}
 
-	VideoSummarizerRunner runner;
-	runner.SetInputHomeDirPath(wstr);
-	runner.SetOutputHomeDirPath(L"F:\\test");
-	runner.Run();
+    video_summarizer->ShowWindow(SW_SHOW);
 }
 
 void MainDialog::OnFileBring()
@@ -157,8 +152,7 @@ void MainDialog::OnEnChangeEdit()
 BOOL MainDialog::PreTranslateMessage(MSG * pMsg)
 {
     if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
-		//if (pMsg->hwnd == GetDlgItem(PATH_EDIT)->m_hWnd)
-			
+		
 		return TRUE;
     }
 

@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 
 constexpr wchar_t* default_config_name = L"AoConfig.conf";
 constexpr wchar_t* default_base_dir_path = L"C:\\";

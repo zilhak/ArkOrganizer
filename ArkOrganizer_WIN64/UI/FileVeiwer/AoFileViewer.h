@@ -14,7 +14,7 @@ public:
 
 public:
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_ARKORGANIZER_WIN64_DIALOG };
+	enum { IDD = IDD_FILEVIEWER };
 #endif
 #ifdef _DEBUG
 	virtual void AssertValid() const;

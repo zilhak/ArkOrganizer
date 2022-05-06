@@ -10,7 +10,7 @@ public:
     ~VideoSummarizerRunner() { /* EMPTY */ };
 
 public:
-    void SetThreadNum        (int thread_num)                       { thread_num_       = thread_num;       }
+    void SetThreadNum        (int thread_num)                        { thread_num_       = thread_num;       }
     void SetInputHomeDirPath (std::wstring const & input_home_path)  { input_home_path_  = input_home_path;  }
     void SetOutputHomeDirPath(std::wstring const & output_home_path) { output_home_path_ = output_home_path; }
     void SetOutputPrefix     (std::wstring const & prefix)           { output_prefix_    = prefix;           }

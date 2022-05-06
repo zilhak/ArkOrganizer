@@ -207,6 +207,7 @@
     <ClInclude Include="UI\ArkOrganizer_WIN64.h" />
     <ClInclude Include="UI\MainDialog.h" />
     <ClInclude Include="UI\FileVeiwer\AoFileViewer.h" />
+    <ClInclude Include="UI\VideoSummarizer\VideoSummarizerDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -223,6 +224,7 @@
     <ClCompile Include="UI\ArkOrganizer_WIN64.cpp" />
     <ClCompile Include="UI\MainDialog.cpp" />
     <ClCompile Include="UI\FileVeiwer\AoFileViewer.cpp" />
+    <ClCompile Include="UI\VideoSummarizer\VideoSummarizerDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ArkOrganizerWIN64.rc" />
