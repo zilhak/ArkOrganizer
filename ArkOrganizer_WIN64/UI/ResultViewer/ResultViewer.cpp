@@ -35,6 +35,7 @@ BOOL ResultViewer::OnInitDialog()
 	int ret = CDialogEx::OnInitDialog();
 	
 	result_manager_ = new ResultManager();
+    image_panel_.ModifyStyle(SS_TYPEMASK,SS_BITMAP);
 
 	SetDlgItemTextW(VIEWER_IMAGE_HOME, configure::GetViewerImagePath().c_str());
 	SetDlgItemTextW(VIEWER_VIDEO_HOME, configure::GetViewerVideoPath().c_str());
@@ -44,21 +45,51 @@ BOOL ResultViewer::OnInitDialog()
 
 void ResultViewer::ShowImage()
 {
+	if (image_list_.size() <= image_index_)
+		return;
 
+	std::wstring image_path = image_list_[image_index_];
+	CImage image;
+	CString path_cstring = image_path.c_str();
+	image.Load(path_cstring);
+	CBitmap bitmap;
+	bitmap.Attach(image.Detach());
+
+	image_panel_.SetBitmap((HBITMAP)bitmap.Detach());
+	SetDlgItemTextW(VIEWER_NUMBER_CURRENT, std::to_wstring(image_index_).c_str());
+
+	std::wstring matching_file = result_manager_->SetAndGetMatchingFileName(image_path);
+	if (matching_file.empty())
+		matching_icon_.SetCheck(0, 0);
+	else 
+		matching_icon_.SetCheck(0, 1);
 }
 
 void ResultViewer::NextImage()
 {
+	image_index_++;
+	if (image_list_.size() <= image_index_) {
+		image_index_--;
+		return;
+		
+	}
 
+	ShowImage();
 }
 
 void ResultViewer::PrevImage()
 { 
+	if (0 < image_index_)
+		image_index_--;
+	else
+		return;
+
+	ShowImage();
 }
 
 void ResultViewer::MoveVideo(int command_index)
 {
-
+	result_manager_->StoreMatchingFile(command_index);
 }
 
 BEGIN_MESSAGE_MAP(ResultViewer, CDialogEx)
@@ -76,9 +107,13 @@ void ResultViewer::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 
 void ResultViewer::OnClickLoad()
 {
+	image_index_ = 0;
 	result_manager_->SetImageHome(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
 	result_manager_->SetVideoHome(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
 	image_list_ = result_manager_->MakeImageList();
+	std::wstring image_total_num_str = std::to_wstring(image_list_.size());
+	GetDlgItem(VIEWER_NUMBER_TOTAL)->SetWindowTextW(image_total_num_str.c_str());
+	ShowImage();
 }
 
 BOOL ResultViewer::PreTranslateMessage(MSG * pMsg)
@@ -86,16 +121,29 @@ BOOL ResultViewer::PreTranslateMessage(MSG * pMsg)
     if (pMsg->message == WM_KEYDOWN) { 
 		if (pMsg->wParam == VK_RETURN) {
             if (pMsg->hwnd == GetDlgItem(VIEWER_IMAGE_HOME)->m_hWnd) {
-                configure::SetSummarizeOutputPath(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
+                configure::SetViewerImagePath(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
                 configure::SaveConfig();
             } else if (pMsg->hwnd == GetDlgItem(VIEWER_VIDEO_HOME)->m_hWnd) {
-                configure::SetSummarizeInputPath(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
+                configure::SetViewerVideoPath(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
                 configure::SaveConfig();
             }
+		} else if (pMsg->wParam == 'A') {
+			PrevImage();
+		} else if (pMsg->wParam == 'D') {
+			NextImage();
+		} else if (pMsg->wParam == 'Z') {
+			MoveVideo(1);
+		} else if (pMsg->wParam == 'X') {
+			MoveVideo(2);
+		} else if (pMsg->wParam == 'C') {
+			MoveVideo(3);
+		} else if (pMsg->wParam == 'V') {
+			MoveVideo(4);
 		}
-		
-		return TRUE;
+
+        return TRUE;
     }
 
     return CDialogEx::PreTranslateMessage(pMsg);
 }
+
