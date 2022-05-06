@@ -16,4 +16,5 @@ public:
     void SetVideoHome(std::wstring const & home_dir);
     std::vector<std::wstring> MakeImageList();
     std::wstring SetAndGetMatchingFileName(std::filesystem::path const & image_file_path);
+    void StoreMatchingFile(int store_index);
 };

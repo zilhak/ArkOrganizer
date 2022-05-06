@@ -3,6 +3,7 @@
 
 #include <Util/PathUtil.h>
 #include <Util/ExtensionUtil.h>
+#include <Util/FileUtil.h>
 #include <Interface/EventInterface.h>
 
 constexpr wchar_t* move_dir_1 = L"AoStore1";
@@ -20,13 +21,7 @@ std::vector<std::wstring> ResultManager::MakeImageList()
             return false;
     };
 
-    auto path_list = util::path::MakeFilePathList(image_home_dir_, is_image);
-
-    std::vector<std::string> path_list_string;
-    for (auto const & path_unicode : path_list) {
-        std::filesystem::path path = (path_unicode);
-        path_list_string.emplace_back(path.string());
-    }
+    return util::path::MakeFilePathList(image_home_dir_, is_image);
 }
 
 std::wstring ResultManager::SetAndGetMatchingFileName(std::filesystem::path const & image_file_path)
@@ -57,4 +52,31 @@ void ResultManager::SetVideoHome(std::wstring const & home_dir)
     if (!std::filesystem::exists(video_home_dir_) || !std::filesystem::is_directory(video_home_dir_)) {
         video_home_dir_.clear();
     }
+}
+
+void ResultManager::StoreMatchingFile(int store_index)
+{
+    if (!std::filesystem::exists(matching_file_) && !std::filesystem::exists(video_home_dir_))
+        return;
+
+    std::filesystem::path relative_path = std::filesystem::relative(matching_file_.parent_path(), video_home_dir_);
+    std::filesystem::path store_home = video_home_dir_.parent_path();
+    switch (store_index) {
+        case 1:
+            store_home /= move_dir_1;
+            break;
+        case 2:
+            store_home /= move_dir_2;
+            break;
+        case 3:
+            store_home /= move_dir_3;
+            break;
+        case 4:
+            store_home /= move_dir_4;
+            break;
+        default:
+            return;
+    }
+
+    util::file::moveToDir(matching_file_, store_home);
 }

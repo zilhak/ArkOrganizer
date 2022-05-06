@@ -17,21 +17,48 @@ ResultViewer::ResultViewer(CWnd* pParent /*=nullptr*/)
 
 ResultViewer::~ResultViewer()
 {
+	if (result_manager_) {
+		delete result_manager_;
+		result_manager_ = nullptr;
+	}
 }
 
 void ResultViewer::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, VIEWER_IMAGE_PANEL, image_panel_);
+	DDX_Control(pDX, VIEWER_MATCHING, matching_icon_);
 }
 
 BOOL ResultViewer::OnInitDialog()
 {
 	int ret = CDialogEx::OnInitDialog();
 	
+	result_manager_ = new ResultManager();
+
 	SetDlgItemTextW(VIEWER_IMAGE_HOME, configure::GetViewerImagePath().c_str());
 	SetDlgItemTextW(VIEWER_VIDEO_HOME, configure::GetViewerVideoPath().c_str());
 
 	return ret;
+}
+
+void ResultViewer::ShowImage()
+{
+
+}
+
+void ResultViewer::NextImage()
+{
+
+}
+
+void ResultViewer::PrevImage()
+{ 
+}
+
+void ResultViewer::MoveVideo(int command_index)
+{
+
 }
 
 BEGIN_MESSAGE_MAP(ResultViewer, CDialogEx)
@@ -49,7 +76,9 @@ void ResultViewer::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 
 void ResultViewer::OnClickLoad()
 {
-
+	result_manager_->SetImageHome(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
+	result_manager_->SetVideoHome(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
+	image_list_ = result_manager_->MakeImageList();
 }
 
 BOOL ResultViewer::PreTranslateMessage(MSG * pMsg)

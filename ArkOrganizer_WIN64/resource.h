@@ -29,6 +29,7 @@
 #define IDC_CHECK2                      1031
 #define IDC_PROGRESS1                   1032
 #define IMAGE_PANEL                     1036
+#define VIEWER_IMAGE_PANEL              1036
 #define VIEWER_NUMBER_CURRENT           1037
 #define VIEWER_NUMBER_TOTAL             1038
 #define VIEWER_CUR_IMAGENAME            1039
@@ -36,7 +37,6 @@
 #define IDC_MFCEDITBROWSE2              1041
 #define VIEWER_VIDEO_HOME               1041
 #define VIEWER_MATCHING                 1042
-#define VIEWER_LOAD                     1043
 #define VIEWER_BUTTON_LOAD              1043
 
 // Next default values for new objects
