@@ -50,6 +50,14 @@ void ResultViewer::ShowImage()
 
 	std::wstring image_path = image_list_[image_index_];
 	CImage image;
+	CString path_cstring = image_path.c_str();
+	image.Load(path_cstring);
+	CBitmap bitmap;
+	bitmap.Attach(image.Detach());
+
+	image_panel_.SetBitmap((HBITMAP)bitmap.Detach());
+	SetDlgItemTextW(VIEWER_NUMBER_CURRENT, std::to_wstring(image_index_).c_str());
+
 	std::wstring matching_file = result_manager_->SetAndGetMatchingFileName(image_path);
 	if (matching_file.empty())
 		matching_icon_.SetCheck(0);
