@@ -22,5 +22,6 @@ protected:
 
 protected:
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
+	afx_msg void OnClickLoad();
 	afx_msg BOOL PreTranslateMessage(MSG* pMsg) override;
 };
