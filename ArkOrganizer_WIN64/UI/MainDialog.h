@@ -25,13 +25,11 @@ protected:
 	void AllocForm();
 
 
-// 구현입니다.
 protected:
 	HICON m_hIcon;
 	AoFileViewer* file_viewer_ = nullptr;
 	VideoSummarizerDialog* video_summarizer = nullptr;
 
-	// 생성된 메시지 맵 함수
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
@@ -45,5 +43,4 @@ private:
 	afx_msg void OnBnClickedPathUndo();
 	afx_msg void OnEnChangeEdit();
 	afx_msg BOOL PreTranslateMessage(MSG* pMsg) override;
-
 };

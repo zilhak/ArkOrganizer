@@ -25,10 +25,6 @@ BOOL VideoSummarizerDialog::OnInitDialog()
 {
 	int ret = CDialogEx::OnInitDialog();
 
-	CWnd* cwnd = GetDlgItem(IDC_VIDEOSUMMARIZER_INPUT_PATH);
-	HWND hWnd = cwnd->m_hWnd;
-	video_path_ctrl_.Attach(hWnd);
-	output_path_ctrl_.Attach(GetDlgItem(IDC_VIDEOSUMMARIZER_OUTPUT_PATH)->m_hWnd);
 	runner_ = new VideoSummarizerRunner();
 
 	return ret;
@@ -36,17 +32,19 @@ BOOL VideoSummarizerDialog::OnInitDialog()
 
 void VideoSummarizerDialog::SetInputPath(std::wstring const & path)
 {
-	video_path_ctrl_.SetDlgItemTextW(IDC_VIDEOSUMMARIZER_INPUT_PATH, path.c_str());
+	SetDlgItemTextW(IDC_VIDEOSUMMARIZER_INPUT_PATH, path.c_str());
 }
 
 void VideoSummarizerDialog::SetOutputPath(std::wstring const & path)
 {
-	output_path_ctrl_.SetDlgItemTextW(IDC_VIDEOSUMMARIZER_OUTPUT_PATH, path.c_str());
+	SetDlgItemTextW(IDC_VIDEOSUMMARIZER_OUTPUT_PATH, path.c_str());
 }
 
 void VideoSummarizerDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_VIDEOSUMMARIZER_INPUT_PATH, video_path_ctrl_);
+	DDX_Control(pDX, IDC_VIDEOSUMMARIZER_OUTPUT_PATH, output_path_ctrl_);
 }
 
 
@@ -72,4 +70,19 @@ void VideoSummarizerDialog::OnClickRun()
 void VideoSummarizerDialog::OnClickStop()
 {
 
+}
+
+BOOL VideoSummarizerDialog::PreTranslateMessage(MSG * pMsg)
+{
+    if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
+		if (pMsg->hwnd == output_path_ctrl_.m_hWnd) {
+
+		} else if (pMsg->hwnd == video_path_ctrl_.m_hWnd) {
+
+		}
+		
+		return TRUE;
+    }
+
+    return CDialogEx::PreTranslateMessage(pMsg);
 }

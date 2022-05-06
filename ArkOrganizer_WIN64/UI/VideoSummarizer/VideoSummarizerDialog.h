@@ -25,11 +25,12 @@ private:
 #endif
 public:
 	afx_msg BOOL OnInitDialog() override;
+	afx_msg BOOL PreTranslateMessage(MSG* pMsg) override;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
 private:
-	void OnClickRun();
-	void OnClickStop();
+	afx_msg void OnClickRun();
+	afx_msg void OnClickStop();
 };

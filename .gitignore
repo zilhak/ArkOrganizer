@@ -453,4 +453,8 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# ArkOrganizer config file
+*.aoconf
+tags.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudio,vim,opencv

@@ -56,6 +56,7 @@ BOOL MainDialog::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hIcon, FALSE);
 	AllocForm();
+	configure::LoadConfig();
 
 	return TRUE;
 }
@@ -152,9 +153,16 @@ void MainDialog::OnEnChangeEdit()
 BOOL MainDialog::PreTranslateMessage(MSG * pMsg)
 {
     if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
-		
+		if (pMsg->hwnd == GetDlgItem(PATH_EDIT)->m_hWnd) {
+            CString output_dir;
+            configure::AoConfig config;
+            GetDlgItemTextW(PATH_EDIT, output_dir);
+            config.base_dir_path = output_dir;
+			configure::SaveConfig(config);
+		} 
+
 		return TRUE;
     }
 
-    return CDialog::PreTranslateMessage(pMsg);
+    return CDialogEx::PreTranslateMessage(pMsg);
 }
