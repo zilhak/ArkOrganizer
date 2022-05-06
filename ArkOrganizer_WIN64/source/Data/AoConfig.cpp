@@ -8,7 +8,7 @@ namespace configure {
 
 static AoConfig g_config;
 
-AoConfig const & getConfigData()
+AoConfig const & GetConfigData()
 { 
     return g_config; 
 }
@@ -19,7 +19,8 @@ std::vector<std::wstring> encode(AoConfig const & config)
     encoded_strings.emplace_back(std::wstring(base_dir_path_id)         + file_seperator + config.base_dir_path);
     encoded_strings.emplace_back(std::wstring(summarize_intput_path_id) + file_seperator + config.summarize_intput_path);
     encoded_strings.emplace_back(std::wstring(summarize_output_path_id) + file_seperator + config.summarize_output_path);
-    encoded_strings.emplace_back(std::wstring(viewer_path_id)           + file_seperator + config.viewer_path);
+    encoded_strings.emplace_back(std::wstring(viewer_image_path_id)     + file_seperator + config.viewer_image_path);
+    encoded_strings.emplace_back(std::wstring(viewer_video_path_id)     + file_seperator + config.viewer_video_path);
 
     encoded_strings.emplace_back(tag_line_seperator);
     for (std::wstring const & tag : config.tag_list) {
@@ -52,8 +53,10 @@ void decode(AoConfig & config, std::wstring const & text)
         config.summarize_intput_path = data;
     else if (id == summarize_output_path_id)
         config.summarize_output_path = data;
-    else if (id == viewer_path_id)
-        config.viewer_path = data;
+    else if (id == viewer_image_path_id)
+        config.viewer_image_path = data;
+    else if (id == viewer_video_path_id)
+        config.viewer_video_path = data;
 }
 
 bool SaveConfig(AoConfig const & config_data, std::wstring const & config_file_name)
@@ -122,9 +125,14 @@ void SetSummarizeOutputPath(std::wstring const & summarize_output_path)
     g_config.summarize_output_path = summarize_output_path;
 }
 
-void SetViewerPath(std::wstring const & viewer_path)
+void SetViewerImagePath(std::wstring const & viewer_image_path)
 {
-    g_config.viewer_path = viewer_path;
+    g_config.viewer_image_path = viewer_image_path;
+}
+
+void SetViewerVideoPath(std::wstring const & viewer_video_path)
+{
+    g_config.viewer_video_path = viewer_video_path;
 }
 
 std::wstring const & GetBaseDirPath()
@@ -142,19 +150,24 @@ std::wstring const & GetSummarizeOutputPath()
     return g_config.summarize_output_path;
 }
 
-std::wstring const & GetViewerPath()
+std::wstring const & GetViewerImagePath()
 {
-    return g_config.viewer_path;
+    return g_config.viewer_image_path;
 }
 
-void AddTag(std::wstring const & base_dir_path)
+std::wstring const & GetViewerVideoPath()
 {
-    g_config.tag_list.insert(base_dir_path);
+    return g_config.viewer_video_path;
 }
 
-bool DeleteTag(std::wstring const & base_dir_path)
+void AddTag(std::wstring const & tag)
 {
-    g_config.tag_list.erase(base_dir_path);
+    g_config.tag_list.insert(tag);
+}
+
+bool DeleteTag(std::wstring const & tag)
+{
+    g_config.tag_list.erase(tag);
     return true;
 }
 

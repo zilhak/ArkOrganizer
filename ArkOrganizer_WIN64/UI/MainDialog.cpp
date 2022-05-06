@@ -125,12 +125,14 @@ void MainDialog::OnFileBring()
 
 void MainDialog::OnViewOutput()
 {
-	CString output_dir;
-	GetDlgItemTextW(OUTPUT_PATH_EDIT, output_dir);
-	std::wstring wstr(output_dir);
-	std::filesystem::path home_path(wstr);
-	
-	ResultManager::viewResult(home_path);
+	ResultViewer viewer(this);
+	viewer.DoModal();
+	//CString output_dir;
+	//GetDlgItemTextW(OUTPUT_PATH_EDIT, output_dir);
+	//std::wstring wstr(output_dir);
+	//std::filesystem::path home_path(wstr);
+	//
+	//ResultManager::viewResult(home_path);
 }
 
 

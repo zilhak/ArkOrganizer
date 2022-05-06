@@ -4,10 +4,9 @@
 
 #include <UI/FileVeiwer/AoFileViewer.h>
 #include <UI/VideoSummarizer/VideoSummarizerDialog.h>
+#include <UI/ResultViewer/ResultViewer.h>
 
-#include <VideoSummarize/VideoSummarizeRunner.h>
 #include <OneFileBringer/OneFileBringer.h>
-#include <ResultManager/ResultManager.h>
 
 class MainDialog : public CDialogEx
 {

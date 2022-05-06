@@ -6,6 +6,7 @@
 #define IDD_VIDEO_SUMMARIZER            107
 #define IDR_MAINFRAME                   128
 #define IDD_FILEVIEWER                  132
+#define IDD_RESULT_VIEWER               133
 #define BUTTON_VIDEOSUMMARIZER          1000
 #define PATH_EDIT                       1002
 #define BUTTON_FILEBRINGER              1008
@@ -27,15 +28,22 @@
 #define IDC_CHECK1                      1030
 #define IDC_CHECK2                      1031
 #define IDC_PROGRESS1                   1032
-#define IDC_MFCEDITBROWSE1              1035
+#define IMAGE_PANEL                     1036
+#define VIEWER_NUMBER_CURRENT           1037
+#define VIEWER_NUMBER_TOTAL             1038
+#define VIEWER_CUR_IMAGENAME            1039
+#define VIEWER_IMAGE_HOME               1040
+#define IDC_MFCEDITBROWSE2              1041
+#define VIEWER_VIDEO_HOME               1041
+#define VIEWER_MATCHING                 1042
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        136
+#define _APS_NEXT_RESOURCE_VALUE        138
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1036
+#define _APS_NEXT_CONTROL_VALUE         1043
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

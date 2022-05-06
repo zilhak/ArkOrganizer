@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\ArkOrganizerUI\OptionView">
       <UniqueIdentifier>{eea9d656-e43b-47bc-a743-fdb978da693d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\ArkOrganizerUI\ResultViewerDialog">
+      <UniqueIdentifier>{cd455d56-c580-48ce-bc2a-84e1b190905c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -87,6 +90,9 @@
     <ClInclude Include="source\Data\MFCUtil.h">
       <Filter>소스 파일\Data</Filter>
     </ClInclude>
+    <ClInclude Include="UI\ResultViewer\ResultViewer.h">
+      <Filter>소스 파일\ArkOrganizerUI\ResultViewerDialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -121,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="source\Data\MFCUtil.cpp">
       <Filter>소스 파일\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ResultViewer\ResultViewer.cpp">
+      <Filter>소스 파일\ArkOrganizerUI\ResultViewerDialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
