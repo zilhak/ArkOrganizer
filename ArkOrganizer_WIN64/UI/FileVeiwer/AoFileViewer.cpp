@@ -1,6 +1,7 @@
 ﻿#include <pch.h>
 #include "AoFileViewer.h"
 #include "../ArkOrganizer_WIN64.h"
+#include <Data/MFCUtil.h>
 
 IMPLEMENT_DYNCREATE(AoFileViewer, CFormView)
 

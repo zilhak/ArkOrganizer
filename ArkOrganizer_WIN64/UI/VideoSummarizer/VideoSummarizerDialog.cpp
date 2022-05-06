@@ -4,6 +4,8 @@
 #include "afxdialogex.h"
 
 #include <VideoSummarize/VideoSummarizeRunner.h>
+#include <Data/MFCUtil.h>
+#include <Data/AoConfig.h>
 
 IMPLEMENT_DYNAMIC(VideoSummarizerDialog, CDialogEx)
 
@@ -76,9 +78,11 @@ BOOL VideoSummarizerDialog::PreTranslateMessage(MSG * pMsg)
 {
     if ((pMsg->message == WM_KEYDOWN) && (pMsg->wParam == VK_RETURN)) {
 		if (pMsg->hwnd == output_path_ctrl_.m_hWnd) {
-
+			configure::SetSummarizeOutputPath(MFCUtil::GetDlgText(this, IDC_VIDEOSUMMARIZER_OUTPUT_PATH));
+			configure::SaveConfig();
 		} else if (pMsg->hwnd == video_path_ctrl_.m_hWnd) {
-
+			configure::SetSummarizeInputPath(MFCUtil::GetDlgText(this, IDC_VIDEOSUMMARIZER_INPUT_PATH));
+			configure::SaveConfig();
 		}
 		
 		return TRUE;

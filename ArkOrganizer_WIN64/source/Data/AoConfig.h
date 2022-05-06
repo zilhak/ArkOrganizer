@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <set>
 
 namespace configure {
 
@@ -24,17 +25,15 @@ struct AoConfig
     std::wstring summarize_intput_path = default_summarize_path;
     std::wstring summarize_output_path = default_summarize_path;
     std::wstring viewer_path = default_base_dir_path;
-    std::vector<std::wstring> tag_list;
+    std::set<std::wstring> tag_list;
 };
-
-extern AoConfig g_config;
 
 AoConfig const & getConfigData();
 
 std::vector<std::wstring> encode(AoConfig const & config);
 void decode(AoConfig & config, std::wstring const & text);
 
-bool SaveConfig(AoConfig const & config_data = g_config, std::wstring const & config_file_name = default_config_name);
+bool SaveConfig(AoConfig const & config_data = getConfigData(), std::wstring const & config_file_name = default_config_name);
 bool LoadConfig(std::wstring const & config_file_name = default_config_name);
 
 void SetBaseDirPath(std::wstring const & base_dir_path);

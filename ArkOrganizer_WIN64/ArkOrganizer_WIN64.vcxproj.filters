@@ -84,7 +84,7 @@
     <ClInclude Include="UI\VideoSummarizer\VideoSummarizerDialog.h">
       <Filter>소스 파일\ArkOrganizerUI\VideoSummarizerDialog</Filter>
     </ClInclude>
-    <ClInclude Include="MFCUtil.h">
+    <ClInclude Include="source\Data\MFCUtil.h">
       <Filter>소스 파일\Data</Filter>
     </ClInclude>
   </ItemGroup>
@@ -119,7 +119,7 @@
     <ClCompile Include="UI\VideoSummarizer\VideoSummarizerDialog.cpp">
       <Filter>소스 파일\ArkOrganizerUI\VideoSummarizerDialog</Filter>
     </ClCompile>
-    <ClCompile Include="MFCUtil.cpp">
+    <ClCompile Include="source\Data\MFCUtil.cpp">
       <Filter>소스 파일\Data</Filter>
     </ClCompile>
   </ItemGroup>

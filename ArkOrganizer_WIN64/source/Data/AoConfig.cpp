@@ -7,6 +7,7 @@
 namespace configure {
 
 static AoConfig g_config;
+
 AoConfig const & getConfigData()
 { 
     return g_config; 
@@ -15,10 +16,10 @@ AoConfig const & getConfigData()
 std::vector<std::wstring> encode(AoConfig const & config)
 {
     std::vector<std::wstring> encoded_strings;
-    encoded_strings.emplace_back(base_dir_path_id + file_seperator + config.base_dir_path);
-    encoded_strings.emplace_back(summarize_intput_path_id + file_seperator + config.summarize_intput_path);
-    encoded_strings.emplace_back(summarize_output_path_id + file_seperator + config.summarize_output_path);
-    encoded_strings.emplace_back(viewer_path_id + file_seperator + config.viewer_path);
+    encoded_strings.emplace_back(std::wstring(base_dir_path_id)         + file_seperator + config.base_dir_path);
+    encoded_strings.emplace_back(std::wstring(summarize_intput_path_id) + file_seperator + config.summarize_intput_path);
+    encoded_strings.emplace_back(std::wstring(summarize_output_path_id) + file_seperator + config.summarize_output_path);
+    encoded_strings.emplace_back(std::wstring(viewer_path_id)           + file_seperator + config.viewer_path);
 
     encoded_strings.emplace_back(tag_line_seperator);
     for (std::wstring const & tag : config.tag_list) {
@@ -96,7 +97,7 @@ bool LoadConfig(std::wstring const & config_file_name)
     while (!config_file.eof()) {
         std::wstring tag;
         getline(config_file, tag);
-        load_config.tag_list.emplace_back(tag);
+        load_config.tag_list.insert(tag);
     }
 
     g_config = load_config;
@@ -148,11 +149,12 @@ std::wstring const & GetViewerPath()
 
 void AddTag(std::wstring const & base_dir_path)
 {
-    
+    g_config.tag_list.insert(base_dir_path);
 }
 
 bool DeleteTag(std::wstring const & base_dir_path)
 {
+    g_config.tag_list.erase(base_dir_path);
     return true;
 }
 
