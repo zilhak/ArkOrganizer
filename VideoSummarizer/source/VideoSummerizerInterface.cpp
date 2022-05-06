@@ -14,7 +14,7 @@ bool VideoSummarize(SummarizeConfig const & config_data)
         output_real_path = config_data.output_path + ".png";
     
     if (config_data.overwite == false && std::filesystem::exists(output_real_path) == true)
-        return false;
+        return true;
 
     cv::VideoCapture capture(config_data.video_path);
     if (capture.isOpened() == false) {

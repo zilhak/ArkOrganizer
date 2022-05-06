@@ -33,10 +33,14 @@ void VideoSummarizerRunner::Run()
         std::filesystem::path relative_file_path = std::filesystem::relative(file_path, input_home_path_);
         std::filesystem::path output_path(output_home_path_);
         output_path /= relative_file_path;
+        if (!std::filesystem::exists(output_path.parent_path()))
+            std::filesystem::create_directories(output_path.parent_path());
         
         config.video_path.assign(file_path.string());
         config.output_path.assign(output_path.string());
         config.output_rows = 5;
+        config.output_size_width = 1800;
+        config.output_size_height = 900;
 
         if (RunSummarize(config) == false) {
             std::filesystem::path special_case_save_dir(input_home_path_);
