@@ -29,11 +29,16 @@ std::wstring ResultManager::SetAndGetMatchingFileName(std::filesystem::path cons
     std::filesystem::path video_file_name = image_file_path.filename().replace_extension();
     std::filesystem::path relative_path = std::filesystem::relative(image_file_path.parent_path(), image_home_dir_);
     std::filesystem::path video_path = video_home_dir_;
-    video_path /= relative_path;
+
+    if (relative_path != L".")
+        video_path /= relative_path;
+
     video_path /= video_file_name;
 
     if (std::filesystem::exists(video_path))
         matching_file_ = video_path;
+    else
+        matching_file_.clear();
 
     return matching_file_.wstring();
 }
@@ -56,7 +61,7 @@ void ResultManager::SetVideoHome(std::wstring const & home_dir)
 
 void ResultManager::StoreMatchingFile(int store_index)
 {
-    if (!std::filesystem::exists(matching_file_) && !std::filesystem::exists(video_home_dir_))
+    if (!std::filesystem::exists(matching_file_) || !std::filesystem::exists(video_home_dir_))
         return;
 
     std::filesystem::path relative_path = std::filesystem::relative(matching_file_.parent_path(), video_home_dir_);

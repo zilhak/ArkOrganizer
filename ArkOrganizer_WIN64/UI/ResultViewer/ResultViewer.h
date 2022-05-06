@@ -24,9 +24,9 @@ public:
 private:
 	ResultManager* result_manager_ = nullptr;
 	CStatic image_panel_;
-	CCheckListBox matching_icon_;
 	std::vector<std::wstring> image_list_;
 	size_t image_index_ = 0;
+	CButton matching_icon_;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME

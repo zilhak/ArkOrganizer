@@ -66,6 +66,7 @@ void VideoSummarizerDialog::OnClickRun()
 
 	runner_->SetInputHomeDirPath(input_path_wstr);
 	runner_->SetOutputHomeDirPath(output_path_wstr);
+	runner_->SetThreadNum(5);
 	runner_->Run();
 }
 
