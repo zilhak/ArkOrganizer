@@ -62,32 +62,32 @@ void ResultManager::SetVideoHome(std::wstring const & home_dir)
 
 void ResultManager::StoreMatchingFile(int store_index)
 {
-    if (!std::filesystem::exists(matching_file_) || !std::filesystem::exists(video_home_dir_))
-        return;
-
-    std::filesystem::path relative_path = std::filesystem::relative(matching_file_.parent_path(), video_home_dir_);
-    std::filesystem::path store_home = video_home_dir_.parent_path();
-    switch (store_index) {
-        case 1:
-            store_home /= move_dir_1;
-            break;
-        case 2:
-            store_home /= move_dir_2;
-            break;
-        case 3:
-            store_home /= move_dir_3;
-            break;
-        case 4:
-            store_home /= move_dir_4;
-            break;
-        default:
+    auto run_move = [](std::filesystem::path matching_file, std::filesystem::path video_home_dir, int index) { 
+        if (!std::filesystem::exists(matching_file) || !std::filesystem::exists(video_home_dir))
             return;
-    }
 
-    auto run_move = [](std::filesystem::path file, std::filesystem::path dir) { 
-        util::file::moveToDir(file, dir);
+        std::filesystem::path relative_path = std::filesystem::relative(matching_file.parent_path(), video_home_dir);
+        std::filesystem::path store_home = video_home_dir.parent_path();
+        switch (index) {
+            case 1:
+                store_home /= move_dir_1;
+                break;
+            case 2:
+                store_home /= move_dir_2;
+                break;
+            case 3:
+                store_home /= move_dir_3;
+                break;
+            case 4:
+                store_home /= move_dir_4;
+                break;
+            default:
+                return;
+        }
+
+        util::file::moveToDir(matching_file, store_home);
     };
     
-    std::thread runner(run_move, matching_file_, store_home);
+    std::thread runner(run_move, matching_file_, video_home_dir_, store_index);
     runner.detach();
 }
