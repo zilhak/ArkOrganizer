@@ -85,7 +85,7 @@ void ResultManager::StoreMatchingFile(int store_index)
                 return;
         }
 
-        util::file::moveToDir(matching_file, store_home);
+        util::file::moveToDir(matching_file, store_home, true);
     };
     
     std::thread runner(run_move, matching_file_, video_home_dir_, store_index);
