@@ -5,6 +5,7 @@
 #include <Util/ExtensionUtil.h>
 #include <Util/FileUtil.h>
 #include <Interface/EventInterface.h>
+#include <thread>
 
 constexpr wchar_t* move_dir_1 = L"AoStore1";
 constexpr wchar_t* move_dir_2 = L"AoStore2";
@@ -83,5 +84,10 @@ void ResultManager::StoreMatchingFile(int store_index)
             return;
     }
 
-    util::file::moveToDir(matching_file_, store_home);
+    auto run_move = [](std::filesystem::path file, std::filesystem::path dir) { 
+        util::file::moveToDir(file, dir);
+    };
+    
+    std::thread runner(run_move, matching_file_, store_home);
+    runner.detach();
 }

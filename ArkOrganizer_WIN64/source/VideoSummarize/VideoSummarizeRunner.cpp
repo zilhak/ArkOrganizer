@@ -4,6 +4,7 @@
 #include <Util/PathUtil.h>
 #include <Util/ExtensionUtil.h>
 #include <Util/FileUtil.h>
+#include <thread>
 
 bool VideoSummarizerRunner::IsReady()
 {
@@ -43,11 +44,16 @@ void VideoSummarizerRunner::Run()
         config.output_size_height = 900;
 
         if (RunSummarize(config) == false) {
-            std::filesystem::path special_case_save_dir(input_home_path_);
-            special_case_save_dir = special_case_save_dir.parent_path();
-            special_case_save_dir /= "AO_special_case";
-            special_case_save_dir /= relative_file_path;
-            util::file::move(file_path, special_case_save_dir);
+            auto run_move = [](std::wstring input_home_path, std::filesystem::path file_path, std::filesystem::path relative_file_path) { 
+                std::filesystem::path special_case_save_dir(input_home_path);
+                special_case_save_dir = special_case_save_dir.parent_path();
+                special_case_save_dir /= "AO_special_case";
+                special_case_save_dir /= relative_file_path;
+                util::file::move(file_path, special_case_save_dir);
+            };
+            
+            std::thread runner(run_move, input_home_path_, file_path, relative_file_path);
+            runner.detach();
         }
     }
 }

@@ -21,6 +21,12 @@ ResultViewer::~ResultViewer()
 		delete result_manager_;
 		result_manager_ = nullptr;
 	}
+	
+	for (auto bitmap_ptr : caching_image_list_) {
+		if (bitmap_ptr != nullptr) {
+			delete(bitmap_ptr);
+		}
+	}
 }
 
 void ResultViewer::DoDataExchange(CDataExchange* pDX)
@@ -43,20 +49,58 @@ BOOL ResultViewer::OnInitDialog()
 	return ret;
 }
 
+void ResultViewer::RunCaching()
+{
+	if (caching_image_list_.size() <= image_index_)
+		return;
+
+	if (caching_image_list_[image_index_] != nullptr)
+		return;
+
+	int index = image_index_ - caching_range_;
+	if (index < 0)
+		index = 0;
+	int end_index = image_index_ + caching_range_ + 1;
+	if (caching_image_list_.size() <= end_index) {
+		end_index = caching_image_list_.size() - 1;
+	}
+
+	for (; index < end_index; index++) {
+		if (caching_image_list_[index] = nullptr) {
+            std::wstring image_path = image_list_[image_index_];
+            CImage image;
+            CString path_cstring = image_path.c_str();
+			CBitmap *bitmap = new CBitmap();
+            image.Load(path_cstring);
+            bitmap->Attach(image.Detach());
+			caching_image_list_[index] = bitmap;
+		}
+	}
+}
+
 void ResultViewer::ShowImage()
 {
 	if (image_list_.size() <= image_index_)
 		return;
 
-	std::wstring image_path = image_list_[image_index_];
-	CImage image;
-	CString path_cstring = image_path.c_str();
-	image.Load(path_cstring);
-	CBitmap bitmap;
-	bitmap.Attach(image.Detach());
+	if (use_image_cache_)
+		RunCaching();
 
-	image_panel_.SetBitmap((HBITMAP)bitmap.Detach());
+	std::wstring image_path = image_list_[image_index_];
+	CBitmap bitmap;
+
+	if (caching_image_list_[image_index_] != nullptr) {
+        image_panel_.SetBitmap((HBITMAP)caching_image_list_[image_index_]);
+	} else {
+        CImage image;
+        CString path_cstring = image_path.c_str();
+        image.Load(path_cstring);
+        bitmap.Attach(image.Detach());
+        image_panel_.SetBitmap(bitmap);
+	}
+
 	SetDlgItemTextW(VIEWER_NUMBER_CURRENT, std::to_wstring(image_index_).c_str());
+	SetDlgItemTextW(VIEWER_CUR_IMAGENAME, image_path.c_str());
 
 	std::wstring matching_file = result_manager_->SetAndGetMatchingFileName(image_path);
 	if (matching_file.empty())
@@ -90,6 +134,7 @@ void ResultViewer::PrevImage()
 void ResultViewer::MoveVideo(int command_index)
 {
 	result_manager_->StoreMatchingFile(command_index);
+    matching_icon_.SetCheck(0);
 }
 
 BEGIN_MESSAGE_MAP(ResultViewer, CDialogEx)
@@ -113,6 +158,8 @@ void ResultViewer::OnClickLoad()
 	image_list_ = result_manager_->MakeImageList();
 	std::wstring image_total_num_str = std::to_wstring(image_list_.size());
 	GetDlgItem(VIEWER_NUMBER_TOTAL)->SetWindowTextW(image_total_num_str.c_str());
+
+	caching_image_list_.resize(image_list_.size(), nullptr);
 	ShowImage();
 }
 
