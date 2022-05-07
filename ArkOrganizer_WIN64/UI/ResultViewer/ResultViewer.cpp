@@ -69,7 +69,7 @@ void ResultViewer::RunCaching()
 
 	for (; index < end_index; index++) {
 		if (caching_image_list_[index] == nullptr) {
-            std::wstring image_path = image_list_[image_index_];
+            std::wstring image_path = image_list_[index];
             CImage image;
             CString path_cstring = image_path.c_str();
 			CBitmap *bitmap = new CBitmap();
@@ -92,7 +92,7 @@ void ResultViewer::ShowImage()
 	CBitmap bitmap;
 
 	if (caching_image_list_[image_index_] != nullptr) {
-        image_panel_.SetBitmap((HBITMAP)caching_image_list_[image_index_]);
+        image_panel_.SetBitmap((HBITMAP)*caching_image_list_[image_index_]);
 	} else {
         CImage image;
         CString path_cstring = image_path.c_str();
