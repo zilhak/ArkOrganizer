@@ -68,7 +68,7 @@ void ResultViewer::RunCaching()
 	}
 
 	for (; index < end_index; index++) {
-		if (caching_image_list_[index] = nullptr) {
+		if (caching_image_list_[index] == nullptr) {
             std::wstring image_path = image_list_[image_index_];
             CImage image;
             CString path_cstring = image_path.c_str();
