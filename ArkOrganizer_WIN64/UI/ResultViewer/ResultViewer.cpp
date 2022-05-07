@@ -45,6 +45,8 @@ BOOL ResultViewer::OnInitDialog()
 
 	SetDlgItemTextW(VIEWER_IMAGE_HOME, configure::GetViewerImagePath().c_str());
 	SetDlgItemTextW(VIEWER_VIDEO_HOME, configure::GetViewerVideoPath().c_str());
+	hwnd_image_path_edit_= GetDlgItem(VIEWER_IMAGE_HOME)->m_hWnd;
+	hwnd_video_path_edit_= GetDlgItem(VIEWER_VIDEO_HOME)->m_hWnd;
 
 	return ret;
 }
@@ -165,16 +167,20 @@ void ResultViewer::OnClickLoad()
 
 BOOL ResultViewer::PreTranslateMessage(MSG * pMsg)
 {
-    if (pMsg->message == WM_KEYDOWN) { 
-		if (pMsg->wParam == VK_RETURN) {
-            if (pMsg->hwnd == GetDlgItem(VIEWER_IMAGE_HOME)->m_hWnd) {
-                configure::SetViewerImagePath(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
-                configure::SaveConfig();
-            } else if (pMsg->hwnd == GetDlgItem(VIEWER_VIDEO_HOME)->m_hWnd) {
-                configure::SetViewerVideoPath(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
-                configure::SaveConfig();
-            }
-		} else if (pMsg->wParam == 'A') {
+    if (pMsg->hwnd == hwnd_image_path_edit_) {
+        if (pMsg->wParam == VK_RETURN) {
+            configure::SetViewerImagePath(MFCUtil::GetDlgText(this, VIEWER_IMAGE_HOME));
+            configure::SaveConfig();
+            return TRUE;
+		} 
+    } else if (pMsg->hwnd == hwnd_video_path_edit_) {
+        if (pMsg->wParam == VK_RETURN) {
+            configure::SetViewerVideoPath(MFCUtil::GetDlgText(this, VIEWER_VIDEO_HOME));
+            configure::SaveConfig();
+            return TRUE;
+		}
+    } else if (pMsg->message == WM_KEYDOWN) { 
+		if (pMsg->wParam == 'A') {
 			PrevImage();
 		} else if (pMsg->wParam == 'D') {
 			NextImage();

@@ -32,6 +32,10 @@ private:
 	bool use_image_cache_ = true;
 	int caching_range_ = 20;
 
+private:
+	HWND hwnd_image_path_edit_= nullptr;
+	HWND hwnd_video_path_edit_= nullptr;
+
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_RESULT_VIEWER };
