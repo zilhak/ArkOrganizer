@@ -22,7 +22,7 @@ std::vector<std::wstring> ResultManager::MakeImageList()
             return false;
     };
 
-    return util::path::MakeFilePathList(image_home_dir_, is_image);
+    return util::path::MakeFileStrList(image_home_dir_, is_image);
 }
 
 std::wstring ResultManager::SetAndGetMatchingFileName(std::filesystem::path const & image_file_path)

@@ -35,7 +35,9 @@ void VideoSummarizerRunner::Run()
         util::file::move(file_path, special_case_save_dir);
     };
 
-    std::vector<std::wstring> videoList = util::path::MakeFilePathList(input_home_path_, only_videofile);
+    std::vector<Path> videoList = util::path::MakeFilePathList(input_home_path_, only_videofile);
+    InsertFileList(videoList);
+
     for (auto const & file : videoList) {
         std::filesystem::path file_path(file);
         std::filesystem::path relative_file_path = std::filesystem::relative(file_path, input_home_path_);
@@ -79,23 +81,23 @@ std::wstring VideoSummarizerRunner::makeOutputPath(std::wstring && video_path)
     return origin_path;
 }
 
-void VideoSummarizerRunner::InsertFile(std::wstring const & file_name)
+void VideoSummarizerRunner::InsertFile(Path const & file_name)
 {
-    
+    InsertFileToQueue(file_name);
 }
 
-void VideoSummarizerRunner::InsertFileList(std::vector<std::wstring> const & file_list)
+void VideoSummarizerRunner::InsertFileList(std::vector<Path> const & file_list)
 {
-
+    InsertFileListToQueue(file_list);
 }
 
-void VideoSummarizerRunner::InsertFileToQueue(std::wstring const file_name)
+void VideoSummarizerRunner::InsertFileToQueue(Path const & file_name)
 {
     queue_locker_.lock();
     target_queue_.push(file_name);
     queue_locker_.unlock();
 }
-void VideoSummarizerRunner::InsertFileListToQueue(std::vector<std::wstring> const & file_list)
+void VideoSummarizerRunner::InsertFileListToQueue(std::vector<Path> const & file_list)
 {
     queue_locker_.lock();
     for (auto const & file : file_list)
@@ -103,14 +105,12 @@ void VideoSummarizerRunner::InsertFileListToQueue(std::vector<std::wstring> cons
     queue_locker_.unlock();
 }
 
-std::wstring VideoSummarizerRunner::GetFileName(size_t index)
-{
-    return std::wstring();
-}
-
-void VideoSummarizerRunner::PopQueue()
+std::wstring VideoSummarizerRunner::PopQueue()
 {
     queue_locker_.lock();
+    std::wstring first_value = target_queue_.front();
     target_queue_.pop();
     queue_locker_.unlock();
+
+    return first_value;
 }
