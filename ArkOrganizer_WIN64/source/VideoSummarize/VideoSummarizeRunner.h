@@ -42,7 +42,7 @@ public:
 private:
     bool ready = false;
 
-    int thread_num_ = 10;
+    int thread_num_ = 5;
     std::wstring input_home_path_;
     std::wstring output_home_path_;
     std::wstring output_prefix_;

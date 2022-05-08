@@ -27,6 +27,13 @@ void VideoSummarizerRunner::Run()
             return false;
     };
 
+    auto run_move = [](std::wstring input_home_path, std::filesystem::path file_path, std::filesystem::path relative_file_path) { 
+        std::filesystem::path special_case_save_dir(input_home_path);
+        special_case_save_dir = special_case_save_dir.parent_path();
+        special_case_save_dir /= "AO_special_case";
+        special_case_save_dir /= relative_file_path;
+        util::file::move(file_path, special_case_save_dir);
+    };
 
     std::vector<std::wstring> videoList = util::path::MakeFilePathList(input_home_path_, only_videofile);
     for (auto const & file : videoList) {
@@ -37,20 +44,20 @@ void VideoSummarizerRunner::Run()
         if (!std::filesystem::exists(output_path.parent_path()))
             std::filesystem::create_directories(output_path.parent_path());
         
-        config.video_path.assign(file_path.string());
-        config.output_path.assign(output_path.string());
+        try {
+            config.video_path.assign(file_path.string());
+            config.output_path.assign(output_path.string());
+        } catch (std::system_error err) {
+            std::error_code code = err.code();
+            if (code.value() == 1113)
+                run_move(input_home_path_, file_path, relative_file_path);
+            continue;
+        }
         config.output_rows = 5;
         config.output_size_width = 1800;
         config.output_size_height = 900;
 
         if (RunSummarize(config) == false) {
-            auto run_move = [](std::wstring input_home_path, std::filesystem::path file_path, std::filesystem::path relative_file_path) { 
-                std::filesystem::path special_case_save_dir(input_home_path);
-                special_case_save_dir = special_case_save_dir.parent_path();
-                special_case_save_dir /= "AO_special_case";
-                special_case_save_dir /= relative_file_path;
-                util::file::move(file_path, special_case_save_dir);
-            };
             
             std::thread runner(run_move, input_home_path_, file_path, relative_file_path);
             runner.detach();
