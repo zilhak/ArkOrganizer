@@ -101,7 +101,7 @@ void ResultViewer::ShowImage()
         image_panel_.SetBitmap(bitmap);
 	}
 
-	SetDlgItemTextW(VIEWER_NUMBER_CURRENT, std::to_wstring(image_index_).c_str());
+	SetDlgItemTextW(VIEWER_NUMBER_CURRENT, std::to_wstring(image_index_ + 1).c_str());
 	SetDlgItemTextW(VIEWER_CUR_IMAGENAME, image_path.c_str());
 
 	std::wstring matching_file = result_manager_->SetAndGetMatchingFileName(image_path);

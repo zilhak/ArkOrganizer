@@ -30,7 +30,7 @@ private:
 	CButton matching_icon_;
 	size_t image_index_ = 0;
 	bool use_image_cache_ = true;
-	int caching_range_ = 20;
+	int caching_range_ = 100;
 
 private:
 	HWND hwnd_image_path_edit_= nullptr;
