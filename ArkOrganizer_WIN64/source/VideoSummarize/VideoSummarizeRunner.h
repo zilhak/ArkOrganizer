@@ -1,6 +1,7 @@
 #pragma once
 #include <queue>
 #include <mutex>
+#include <atomic>
 #include <Interface/EventInterface.h>
 
 class VideoSummarizerRunner
@@ -36,17 +37,24 @@ public:
     void Run();
 
 public:
-    void insertConfig(summarizer::SummarizeConfig const config);
-    summarizer::SummarizeConfig popConfig();
+    void InsertFile(std::wstring const & file_name);
+    void InsertFileList(std::vector<std::wstring> const & file_list);
 
 private:
-    bool ready = false;
+    void InsertFileToQueue(std::wstring const file_name);
+    void InsertFileListToQueue(std::vector<std::wstring> const & file_list);
+    std::wstring GetFileName(size_t index);
+    void PopQueue();
 
+private:
     int thread_num_ = 5;
+
     std::wstring input_home_path_;
     std::wstring output_home_path_;
     std::wstring output_prefix_;
     std::wstring output_suffix_;
-    std::queue<summarizer::SummarizeConfig> config_queue_;
+
+    std::atomic<size_t> queue_read_index_;
+    std::queue<std::wstring> target_queue_;
     std::mutex queue_locker_;
 };

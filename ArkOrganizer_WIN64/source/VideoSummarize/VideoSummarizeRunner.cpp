@@ -79,20 +79,38 @@ std::wstring VideoSummarizerRunner::makeOutputPath(std::wstring && video_path)
     return origin_path;
 }
 
-void VideoSummarizerRunner::insertConfig(summarizer::SummarizeConfig const config)
+void VideoSummarizerRunner::InsertFile(std::wstring const & file_name)
+{
+    
+}
+
+void VideoSummarizerRunner::InsertFileList(std::vector<std::wstring> const & file_list)
+{
+
+}
+
+void VideoSummarizerRunner::InsertFileToQueue(std::wstring const file_name)
 {
     queue_locker_.lock();
-    config_queue_.push(config);
+    target_queue_.push(file_name);
+    queue_locker_.unlock();
+}
+void VideoSummarizerRunner::InsertFileListToQueue(std::vector<std::wstring> const & file_list)
+{
+    queue_locker_.lock();
+    for (auto const & file : file_list)
+        target_queue_.push(file);
     queue_locker_.unlock();
 }
 
-summarizer::SummarizeConfig VideoSummarizerRunner::popConfig()
+std::wstring VideoSummarizerRunner::GetFileName(size_t index)
 {
-    summarizer::SummarizeConfig result;
-    queue_locker_.lock();
-    result = config_queue_.front();
-    config_queue_.pop();
-    queue_locker_.unlock();
+    return std::wstring();
+}
 
-    return result;
+void VideoSummarizerRunner::PopQueue()
+{
+    queue_locker_.lock();
+    target_queue_.pop();
+    queue_locker_.unlock();
 }
